@@ -28,7 +28,6 @@ function chaika (config, layout) {
 }
 
 function sendLog(udp, host, port, logObject) {
-  console.log(logObject)
   var buffer = new Buffer(JSON.stringify(logObject));
   udp.send(buffer, 0, buffer.length, port, host, function(err, bytes) {
     if(err) {

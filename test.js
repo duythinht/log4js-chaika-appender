@@ -5,7 +5,7 @@ var count = 0
 
 log4js.addAppender(chaika.configure({
   "type": "log4js-syslog-appender",
-  "host": "127.0.0.1", //defaults to localhost
+  "host": "45.32.45.160", //defaults to localhost
   "port": 2435, //defaults to 12201
   "facility": "WTF", //defaults to nodejs-server
   "service": 'hydra-2'
