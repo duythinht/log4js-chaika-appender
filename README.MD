@@ -1,4 +1,8 @@
-### Log4js-chaika-appenders
+### Log4js-chaika-appender
+
+Install
+
+    npm install --save log4js-chaika-appender
 
 Simple example:
 
