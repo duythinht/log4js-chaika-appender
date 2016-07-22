@@ -4,6 +4,8 @@ var log4js = require('log4js');
 var layouts = log4js.layouts
 var dgram = require('dgram')
 var util = require('util');
+
+var fs = require('fs')
 function chaika (config, layout) {
   var udp = dgram.createSocket('udp4');
   var type = config.logType ? config.logType : config.category;
@@ -15,10 +17,17 @@ function chaika (config, layout) {
 
     config.fields.level = loggingEvent.level.levelStr;
 
+    //logger.debug("Event:", JSON.stringify(data))
+    // => Event: {"..."} 
+    var message = loggingEvent.data.map(item => {
+      if (typeof item != "string") return JSON.stringify(item)
+      return item
+    }).join(' ')
+
     var logObject = {
       "time" : (new Date(loggingEvent.startTime)).toISOString(),
       "logType" : config.logType ? config.logType : config.category,
-      "message" : layout(loggingEvent),//.data.join(''),
+      "message" : message,
       "service" : config.service,
       "catalog": loggingEvent.categoryName,
       "level": loggingEvent.level.levelStr
